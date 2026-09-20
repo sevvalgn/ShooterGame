@@ -1,13 +1,17 @@
 # ShooterGame
 
-ShooterGame is an ongoing game development project that started as a console-based shooter and gradually evolved into a graphical Windows Forms application.
+ShooterGame is an ongoing game development project built in C#.
 
-I created this project to challenge myself by continuing to develop the same project instead of starting a new project whenever I wanted to learn something new. The project has grown step by step as I learned new concepts, solved problems, and improved the structure of the application.
+The goal of the project from the beginning has been to develop a complete, installable game that can eventually connect to online services such as a shared leaderboard.
+
+Instead of building separate small projects for each topic I wanted to learn, I decided to keep developing the same game and use each stage to introduce new concepts and solve new problems.
 
 ## Features
 
 - Multiple playable characters with different health and attack values
-- Shooting and enemy projectile systems
+- Character selection
+- Shooting system
+- Enemy projectile system
 - Jumping
 - Collision detection
 - Sprite-based animations
@@ -16,68 +20,62 @@ I created this project to challenge myself by continuing to develop the same pro
 - MySQL database integration
 - Persistent leaderboard
 - Feedback system
-- Graphical user interface with Windows Forms
+- Windows Forms graphical interface
 - Victory and Game Over states
+- ASP.NET Core Web API
 
 ## Screenshots
 
+### Console Version
+
+<img width="1394" height="1040" alt="Ekran görüntüsü 2026-07-11 002638" src="https://github.com/user-attachments/assets/8ba07a7f-51f2-4974-9737-bbe38ceb6f51" />
+
 ### Login
 
-<img width="1430" height="958" alt="Ekran görüntüsü 2026-09-04 140821" src="https://github.com/user-attachments/assets/cdfb0f1b-2874-4008-b78c-569d7034174f" />
+<img width="1430" height="958" alt="Ekran görüntüsü 2026-09-04 140821" src="https://github.com/user-attachments/assets/961498c6-11c6-432c-9cd0-c191d5ba673f" />
 
-### Registeration
+### Register
 
-<img width="1452" height="976" alt="Ekran görüntüsü 2026-09-04 141939" src="https://github.com/user-attachments/assets/d1c819ce-9aa1-431f-a0b0-7cb25bbcc716" />
-
+<img width="1452" height="976" alt="Ekran görüntüsü 2026-09-04 141939" src="https://github.com/user-attachments/assets/f822a10a-5cce-46c6-9067-39dbe16cf704" />
 
 ### Main Menu
 
-<img width="1438" height="898" alt="Ekran görüntüsü 2026-09-04 140904" src="https://github.com/user-attachments/assets/89e6a4a0-1c9e-4882-abd0-2b0fdde5b2e4" />
-
-
+<img width="1438" height="898" alt="Ekran görüntüsü 2026-09-04 140904" src="https://github.com/user-attachments/assets/a00f1489-2aa1-48fd-a8e3-ea87296ffb4f" />
 ### Character Selection
 
-<img width="1446" height="942" alt="Ekran görüntüsü 2026-09-04 140918" src="https://github.com/user-attachments/assets/2b86e9ca-af58-4318-a047-7092eb76ee61" />
-
-
-
+<img width="1446" height="942" alt="Ekran görüntüsü 2026-09-04 140918" src="https://github.com/user-attachments/assets/70cdf9dd-8574-4afe-b53f-3dbdfd05225c" />
 ### Gameplay
 
-<img width="1436" height="992" alt="Ekran görüntüsü 2026-09-04 141008" src="https://github.com/user-attachments/assets/a3573d0f-1d66-4e48-8377-2e893529fec4" />
-
-<img width="1436" height="946" alt="Ekran görüntüsü 2026-09-04 142050" src="https://github.com/user-attachments/assets/2ee4c42b-3f8a-40e1-a6c0-c44a806ab623" />
-
-
-
-### Game Over / Victory
-
-<img width="1448" height="1000" alt="Ekran görüntüsü 2026-09-04 143316" src="https://github.com/user-attachments/assets/787985fc-22a5-4928-91f8-aad95671aedb" />
-
-
+<img width="1436" height="992" alt="Ekran görüntüsü 2026-09-04 141008" src="https://github.com/user-attachments/assets/d6f0c415-b493-4e81-a31a-457e2c1ee0f1" />
+<img width="1448" height="1000" alt="Ekran görüntüsü 2026-09-04 143316" src="https://github.com/user-attachments/assets/8c4e6857-aaa7-489d-82b8-5afcc13c5775" />
 
 ### Leaderboard
 
-<img width="1456" height="938" alt="Ekran görüntüsü 2026-09-04 142809" src="https://github.com/user-attachments/assets/1e715fa6-a9ef-435e-b4ec-0028934e24e2" />
-
-
-
+<img width="1456" height="938" alt="Ekran görüntüsü 2026-09-04 142809" src="https://github.com/user-attachments/assets/e7c5fc6c-b367-419a-95fa-2ead040da4f5" />
 ### Feedback
 
-<img width="1468" height="1004" alt="Ekran görüntüsü 2026-09-04 142818" src="https://github.com/user-attachments/assets/3a9e15c2-ceb5-4b6e-a352-40cceb84e244" />
+<img width="1470" height="1006" alt="Ekran görüntüsü 2026-09-20 141850" src="https://github.com/user-attachments/assets/0350e505-274a-4af4-b3bb-6125d82a1741" />
 
+### API
+
+The game client now communicates with a separate ASP.NET Core API.
+<img width="2330" height="456" alt="Ekran görüntüsü 2026-09-20 142944" src="https://github.com/user-attachments/assets/6be7b5cf-7a09-4ed1-a81b-3b5799154630" />
+<img width="1780" height="500" alt="Ekran görüntüsü 2026-09-20 143030" src="https://github.com/user-attachments/assets/ae62db23-93a4-493a-8c00-bcfcb91ceb99" />
 
 ## Characters
 
 | Character | Health | Attack |
-|-----------|--------:|-------:|
-| Fairy     | 800     | 250    |
-| Soldier   | 500     | 500    |
-| OldMan    | 300     | 1000   |
-| Enemy     | 14000   | 100    |
+| --- | ---: | ---: |
+| Fairy | 800 | 250 |
+| Soldier | 500 | 500 |
+| OldMan | 300 | 1000 |
+| Enemy | 14000 | 100 |
 
 The characters have different gameplay statistics and their own visual assets, animation frames, projectile graphics, and health-bar states.
 
 ## Roadmap
+
+### Completed
 
 ✅ Console shooter game
 
@@ -91,117 +89,57 @@ The characters have different gameplay statistics and their own visual assets, a
 
 ✅ Improved project structure and code organization
 
-🔜 Build an online leaderboard system
+✅ ASP.NET Core API architecture
 
-🔜 Further improve project architecture and code organization
+### Next Steps
+
+🔜 Deploy the backend and database and enable the online leaderboard.
 
 ## Project Progress
 
 ### ✅ Step 1 — Core Game
 
-The project originally started as a console-based shooter. At this stage, I focused on building the game itself and improving my existing C# and object-oriented programming knowledge for gameplay.
+The project started as a console-based shooter.
 
-This included character selection, movement, shooting, jumping, projectiles, collision detection, scoring, and game-state handling.
+The initial stage focused on building the core gameplay systems, including character selection, movement, shooting, jumping, projectiles, collision detection, scoring, and game-state handling.
+
+This stage also strengthened my existing C# and object-oriented programming knowledge.
 
 ### ✅ Step 2 — Database Integration
 
-After building the core game, I introduced MySQL and learned SQL and database integration through the project.
+The next stage introduced MySQL and persistent data.
 
-This added user registration, login, persistent scores, and leaderboard functionality, allowing information to be stored between sessions.
+This added user registration, login, persistent scores, leaderboard data, and feedback functionality.
 
-### ✅ Step 3 — Graphical UI and Project Structure
+I learned SQL, database design, and how database operations can be connected to application logic while continuing to develop the same game.
 
-The next major step was moving the project from the console into a graphical Windows Forms application.
+### ✅ Step 3 — Graphical UI
 
-This was more than replacing console output with images. I had to adapt the game loop, timing, input handling, and game state to an event-driven graphical environment while adding sprite animations, graphical health bars, character selection, menus, feedback, and other visual elements.
+The project was then moved from the console to a Windows Forms graphical interface.
 
-Altough this stage improved the structure of the project, there is still room to improve the architecture as the project becomes more complex, but this was an important step toward a better structured application.
+This required adapting the existing game systems to an event-driven graphical environment.
 
-### 🔜 Step 4 — Online Leaderboard
+The game received graphical menus, character selection, animations, health bars, gameplay screens, leaderboard and feedback forms.
 
-The final planned stage is to make the leaderboard online.
+The goal was not simply to change the appearance of the game, but to make the existing game systems work inside a graphical application.
 
-The current version stores leaderboard data using the database integration developed in the previous stage. The goal is to eventually provide a shared online leaderboard so that players can compete for high scores.
+### ✅ Step 4 — API Architecture
 
-## What I Practiced
+The next architectural step was separating the game client from the database layer.
 
-### OOP
+The project now contains a Windows Forms client and a separate ASP.NET Core Web API.
 
-- Inheritance
-- Polymorphism
-- Constructor chaining
-- Class design
-- Encapsulation
-
-### Game Development
-
-- Game loops
-- Collision detection
-- Projectile systems
-- Animation
-- State management
-- Time-based mechanics
-- Real-time input
-
-### UI and Database
-
-- Windows Forms
-- Event-driven programming
-- SQL fundamentals
-- MySQL integration
-- Connecting database logic with application logic
-- Organizing a larger multi-form project
-
-## Technologies
-
-- C#
-- .NET
-- Windows Forms
-- MySQL
-- MySqlConnector
-
-## Database
-
-MySQL is currently used for:
-
-- User accounts
-- Login and registration
-- Persistent scores
-- Leaderboard data
-- Player feedback
-
-Database credentials are not included in the repository.
-
-The database setup will continue to evolve as part of the online leaderboard stage.
-
-## Purpose
-
-The purpose of this project is to create real-world challenges that provide a practical environment for learning and applying new concepts. 
-
-I started the project with knowledge of C# and object-oriented programming. Instead of stopping after building the initial game, I kept expanding it into new areas that I wanted to learn.
-
-The project has therefore become a long-term learning process:
-
-**Game Development → Database Integration → Graphical UI → Online Functionality**
-
-Each stage has introduced new problems to solve and new concepts to understand.
-
-## What I Learned
-
-One of the most valuable parts of this project has been the process of learning through implementation.
-
-I try to understand the problems I encounter instead of simply looking for the quickest solution. When I get stuck, I research, experiment, and then implement what I have learned.
-
-The transition from the console version to Windows Forms was especially challenging. Adapting the game loop to a graphical, event-driven environment required me to approach the existing game in a different way. Animation, timing, input, coordinates, and game state all had to work together in a new environment.
-
-I also learned SQL and MySQL from the beginning of that part of the project and learned how database operations can be connected to application logic.
-
-The graphical assets were created with AI assistance and then manually edited, organized, and integrated into the game. The source code, however, was written by me. I used AI as a learning and debugging tool rather than having it write the code for me.
-
-The most important result of this project for me is not just the game itself, but how much I learned while building it.
-
-## Development
-
-The project has been developed over approximately two months, alongside a move to another country for school.
-
-It is still an ongoing project. I plan to continue improving the same project and complete the final stage of the roadmap: the online leaderboard.
+```text
+ShooterGame
+Windows Forms Client
+        |
+      HTTP
+        |
+        v
+ShooterGameAPI
+ASP.NET Core
+        |
+Entity Framework Core
+        |
+        v
+      MySQL
