@@ -13,7 +13,6 @@ namespace ShooterGame
         private string playerName;
         public FormMenu(string playerName)
         {
-
             InitializeComponent();
             this.playerName = playerName;
         }

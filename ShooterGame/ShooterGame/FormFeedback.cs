@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
-using MySqlConnector;
-
+using System.Text;
+using System.Text.Json;
+using System.Net.Http;
 namespace ShooterGame
 {
     public partial class FormFeedback : Form
@@ -20,31 +20,26 @@ namespace ShooterGame
             this.playerName = playerName;
         }
 
-        private void btnSend_Click(object sender, EventArgs e)
+        private async void btnSend_Click(object sender, EventArgs e)
         {
             string feedback = txtboxfeedback.Text;
+            Feedbacks feedbacks = new Feedbacks() { Feedback = feedback, Name = playerName};
             if (!string.IsNullOrWhiteSpace(feedback))
             {
-                MySqlConnection connection = new MySqlConnection("Server=localhost;Database=leaderboard;Uid=root;Pwd=PASSWORD");
-                try
+                HttpClient client = new HttpClient();
+    
+                string json = JsonSerializer.Serialize(feedbacks);
+                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await client.PostAsync("https://localhost:7287/api/feedbacks", content);
+                if (response.StatusCode == System.Net.HttpStatusCode.OK)
                 {
-                    connection.Open();
-                    string sql = "INSERT INTO feedback (name, feedback) VALUES(@name, @feedback)";
-                    MySqlCommand cmd = new MySqlCommand(sql, connection);
-                    cmd.Parameters.AddWithValue("@name", playerName);
-                    cmd.Parameters.AddWithValue("@feedback", feedback);
-                    cmd.ExecuteNonQuery();
                     MessageBox.Show("Feedback submitted successfully.");
                     this.Hide();
                     menuForm.Show();
                 }
-                catch (Exception ex)
+                else if(response.StatusCode == System.Net.HttpStatusCode.BadRequest)
                 {
-                    MessageBox.Show(ex.Message);
-                }
-                finally
-                {
-                    connection.Close();
+                    MessageBox.Show("Unsuccesfull.");
                 }
             }
         }
@@ -53,6 +48,17 @@ namespace ShooterGame
         {
             this.Hide();
             menuForm.Show();
+        }
+
+        private void FormFeedback_Load(object sender, EventArgs e)
+        {
+            txtboxfeedback.MaxLength = 500;
+        }
+
+        private void txtboxfeedback_TextChanged(object sender, EventArgs e)
+        {
+            int remaining = txtboxfeedback.MaxLength - txtboxfeedback.TextLength;
+            lblCharacterCount.Text = "/" + remaining;
         }
     }
 }

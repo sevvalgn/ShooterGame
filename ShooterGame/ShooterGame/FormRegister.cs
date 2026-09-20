@@ -1,4 +1,7 @@
-using MySqlConnector;
+using System.Net.Http;
+using System.Text;
+using System.Text.Json;
+
 namespace ShooterGame
 {
     public partial class FormRegister : Form
@@ -9,50 +12,37 @@ namespace ShooterGame
             InitializeComponent();
             this.loginform = formLogin;
         }
-        private void btnRegister_Click(object sender, EventArgs e)
+        private async void btnRegister_Click(object sender, EventArgs e)
         {
             if (txtboxPwd.Text == txtboxPwdAgain.Text)
             {
                 string password = txtboxPwd.Text;
                 string playerName = txtboxName.Text;
-                if (!string.IsNullOrEmpty(playerName) && !string.IsNullOrEmpty(password))
+
+                if (!string.IsNullOrWhiteSpace(playerName) && !string.IsNullOrWhiteSpace(password))
                 {
-                    MySqlConnection con = new MySqlConnection("server=localhost;Database=leaderboard;Uid=root;Pwd=PASSWORD");
+                    HttpClient client = new HttpClient();
+                    User user = new User() { Name = playerName, Password = password };
 
-                    try
-                    {
-                        con.Open();
-                        string sql = "SELECT * FROM namepassword WHERE name = @name";
-                        MySqlCommand command = new MySqlCommand(sql, con);
-                        command.Parameters.AddWithValue("@name", playerName);
-                        MySqlDataReader reader = command.ExecuteReader();
-                        if (reader.Read())
-                        {
-                            reader.Close();
+                    string json = JsonSerializer.Serialize(user);
+                    StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
 
-                            MessageBox.Show("Account for " + playerName + " already exist. Please enter a different name.");
-                        }
-                        else
-                        {
-                            reader.Close();
-                            string sqll = "INSERT INTO namepassword (name,password)" + "VALUES(@name, @password)";
-                            MySqlCommand cmd = new MySqlCommand(sqll, con);
-                            cmd.Parameters.AddWithValue("@name", playerName);
-                            cmd.Parameters.AddWithValue("@password", password);
-                            cmd.ExecuteNonQuery();
-                            MessageBox.Show("Account created successfully.");
-                            this.Hide();
-                            loginform.Show();
-                        }
-                    }
-                    catch (Exception ex)
+                    HttpResponseMessage response = await client.PostAsync("https://localhost:7287/api/loginregister/register", content);
+                        
+                    if(response.StatusCode == System.Net.HttpStatusCode.Conflict)
                     {
-                        MessageBox.Show(ex.Message);
+                        MessageBox.Show("Account for " + playerName + " already exist. Please enter a different name.");
+                        return;
                     }
-                    finally
+                    else if(response.StatusCode == System.Net.HttpStatusCode.BadRequest)
                     {
-                        con.Close();
+                        MessageBox.Show("Please fill in required fields.");
+                        return;
                     }
+
+                    MessageBox.Show("Registration successful.");
+                    this.Hide();
+                    loginform.Show();
                 }
                 else
                 {

@@ -33,6 +33,7 @@
             txtboxfeedback = new TextBox();
             btnSend = new Button();
             button1 = new Button();
+            lblCharacterCount = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -58,6 +59,7 @@
             txtboxfeedback.Size = new Size(547, 233);
             txtboxfeedback.TabIndex = 1;
             txtboxfeedback.TabStop = false;
+            txtboxfeedback.TextChanged += txtboxfeedback_TextChanged;
             // 
             // btnSend
             // 
@@ -85,13 +87,26 @@
             button1.UseVisualStyleBackColor = false;
             button1.Click += button1_Click;
             // 
+            // lblCharacterCount
+            // 
+            lblCharacterCount.AutoSize = true;
+            lblCharacterCount.BackColor = Color.Transparent;
+            lblCharacterCount.Font = new Font("Segoe UI Semibold", 10.125F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 162);
+            lblCharacterCount.ForeColor = SystemColors.ControlLight;
+            lblCharacterCount.Location = new Point(1080, 517);
+            lblCharacterCount.Name = "lblCharacterCount";
+            lblCharacterCount.Size = new Size(78, 37);
+            lblCharacterCount.TabIndex = 4;
+            lblCharacterCount.Text = "/ 500";
+            // 
             // FormFeedback
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.SeaShell;
+            BackColor = Color.White;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             ClientSize = new Size(1469, 950);
+            Controls.Add(lblCharacterCount);
             Controls.Add(button1);
             Controls.Add(btnSend);
             Controls.Add(txtboxfeedback);
@@ -100,6 +115,7 @@
             ForeColor = SystemColors.ControlText;
             Name = "FormFeedback";
             Text = "Give feedback!";
+            Load += FormFeedback_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -111,5 +127,6 @@
         private TextBox txtboxfeedback;
         private Button btnSend;
         private Button button1;
+        private Label lblCharacterCount;
     }
 }

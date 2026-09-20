@@ -6,7 +6,7 @@ namespace ShooterGame
 {
     internal class Fairy : Player
     {
-        public Fairy(string name, int x, int y) : base(name, x, y)
+        public Fairy(string name, string type, int score) : base(name, type, score)
         {
             CurrentHealth = Health();
         }

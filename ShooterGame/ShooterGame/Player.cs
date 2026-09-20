@@ -52,13 +52,14 @@ namespace ShooterGame
             return null;
         }
 
-        public int X;
-        public int Y;
-        public Player(string name, int x, int y) //Positions for characters
+        public int PlayerScore;
+        public string CharacterType;
+        public Player(string name, string type, int score) //Positions for characters
         {
             this.PlayerName = name;
-            X = x;
-            Y = y;
+            this.CharacterType = type;
+            this.PlayerScore = score;
+            
         }
     }
 }

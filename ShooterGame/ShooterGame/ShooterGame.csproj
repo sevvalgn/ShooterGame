@@ -10,6 +10,12 @@
 
   <ItemGroup>
     <None Remove="Resources\BackgroundGame1.png" />
+    <None Remove="Resources\BackgroundGame2.png" />
+    <None Remove="Resources\BackgroundLeaderboard.png" />
+    <None Remove="Resources\BackgroundLogin.png" />
+    <None Remove="Resources\BackgroundMenu.png" />
+    <None Remove="Resources\BackgroundRegister.png" />
+    <None Remove="Resources\BackgroundRegister1.png" />
     <None Remove="Resources\BulletEnemy.png" />
     <None Remove="Resources\BulletFairyPic.png" />
     <None Remove="Resources\BulletOldmanPic.png" />
@@ -72,6 +78,24 @@
 
   <ItemGroup>
     <Content Include="Resources\BackgroundGame1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\BackgroundGame2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\BackgroundLeaderboard.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\BackgroundLogin.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\BackgroundMenu.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\BackgroundRegister.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\BackgroundRegister1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\BulletEnemy.png">
@@ -251,7 +275,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="MySqlConnector" Version="2.6.2" />
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.12" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,11 +1,11 @@
-﻿using MySqlConnector;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using System.Net.Http;
+using System.Text.Json;
 
 namespace ShooterGame
 {
@@ -13,43 +13,41 @@ namespace ShooterGame
     {
         private FormMenu menuForm;
 
-        private void FormLeaderboard_Load(object sender, EventArgs e)
-        {
-            this.BackgroundImage = Image.FromFile(@"Resources\BackgroundLeaderboard.png");
-        }
-
         private string playerName;
-        public FormLeaderboard(FormMenu menu,string playerName)
+        public FormLeaderboard(FormMenu menu, string playerName)
         {
             this.playerName = playerName;
 
             InitializeComponent();
             this.menuForm = menu;
+            Load += FormLeaderboard_Load;
 
-            MySqlConnection connection = new MySqlConnection("Server=localhost;Database=leaderboard;Uid=root;Pwd=PASSWORD");
-            try
+        }
+        private async void FormLeaderboard_Load(object sender, EventArgs e)
+        {
+            this.BackgroundImage = Image.FromFile(@"Resources\BackgroundLeaderboard.png");
+            await Leaderboard();
+        }
+        public async Task Leaderboard()
+        {
+            HttpClient client = new HttpClient();
+            var options = new JsonSerializerOptions
             {
-                connection.Open();
-                string sql = "SELECT * FROM leaderboard ORDER BY score DESC LIMIT 10";
-                MySqlCommand command = new MySqlCommand(sql, connection);
-                MySqlDataReader reader = command.ExecuteReader();
-                while (reader.Read())
+                PropertyNameCaseInsensitive = true
+            };
+            string json = await client.GetStringAsync("https://localhost:7287/api/leaderboard/10");
+            List<LeaderboardPlayer> leaderboard = JsonSerializer.Deserialize<List<LeaderboardPlayer>>(json, options);
+            if(leaderboard == null)
+            {
+                return;
+            }
+            foreach (LeaderboardPlayer player in leaderboard)
+            {
+                if (player.Name == playerName)
                 {
-                    if (reader["name"].ToString() == playerName)
-                    {
-                        lblLeaderboard.Text += ">>";
-                    }
-                    lblLeaderboard.Text += reader["name"].ToString() + " - " + reader["charactertype"].ToString() + " - " + reader["score"].ToString() + Environment.NewLine;
+                    lblLeaderboard.Text += ">>";
                 }
-                reader.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                connection.Close();
+                lblLeaderboard.Text += $"{player.Name} - {player.CharacterType} - {player.Score} \n";
             }
         }
 

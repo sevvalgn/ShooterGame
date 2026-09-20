@@ -29,24 +29,24 @@ namespace ShooterGame
         }
         private void picFairy_Click(object sender, EventArgs e)
         {
-            player = new Fairy(playerName, 2, 30);
+            player = new Fairy(playerName, "Fairy", 0);
             this.Hide();
-            FormGame gameform = new FormGame(menuForm, playerName, player);
+            FormGame gameform = new FormGame(menuForm, player);
             gameform.Show();
         }
         private void picSoldier_Click(object sender, EventArgs e)
         {
-            player = new Soldier(playerName, 2, 30);
+            player = new Soldier(playerName, "Soldier", 0);
             this.Hide();
-            FormGame gameform = new FormGame(menuForm, playerName, player);
+            FormGame gameform = new FormGame(menuForm, player);
             gameform.Show();
         }
 
         private void picOldman_Click(object sender, EventArgs e)
         {
-            player = new OldMan(playerName, 2, 30); 
+            player = new OldMan(playerName, "OldMan", 0); 
             this.Hide();
-            FormGame gameform = new FormGame(menuForm, playerName, player);
+            FormGame gameform = new FormGame(menuForm, player);
             gameform.Show();
         }
 
