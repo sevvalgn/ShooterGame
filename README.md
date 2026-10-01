@@ -78,7 +78,7 @@ The Windows Forms application communicates with the backend through HTTP request
 * Custom application icon
 * Fixed window size
 * Controlled scaling configuration
-* Leaderboard System
+### Leaderboard System
 
 *The leaderboard displays the Top 10 scores.*
 
@@ -113,8 +113,6 @@ Each character includes:
 * Unique animation frames
 * Unique projectile graphics
 * Unique health-bar states
-* Technologies Used
-* Category
 
 ## Technologies
 | Category | Technology |
