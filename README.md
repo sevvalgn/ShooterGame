@@ -247,7 +247,7 @@ Users can download, install, and play the game without accessing the source code
 
 ## Screenshots
 ### Console Version
-<img width="1408" height="1058" alt="Ekran görüntüsü 2026-07-11 002415" src="https://github.com/user-attachments/assets/d665c0b4-4068-4bb1-bc5d-79724d635912" />
+<img width="1394" height="1040" alt="Ekran görüntüsü 2026-07-11 002638" src="https://github.com/user-attachments/assets/330bf2ee-35b6-4983-9422-78dd1fbbfe05" />
 
 ### Login
 <img width="1430" height="958" alt="Ekran görüntüsü 2026-09-04 140821" src="https://github.com/user-attachments/assets/d46891b0-03ff-4f65-8f0e-b6e9c5c3b106" />
