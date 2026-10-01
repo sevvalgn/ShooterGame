@@ -39,12 +39,20 @@
             timer1 = new System.Windows.Forms.Timer(components);
             lblResult = new Label();
             lblScoreResult = new Label();
+            btnBack = new Button();
+            btnPicPause = new PictureBox();
+            pnlIsExisting = new Panel();
+            btnResume = new Button();
+            btnExit = new Button();
+            lblAreYouSure = new Label();
             ((System.ComponentModel.ISupportInitialize)picEnemy).BeginInit();
             ((System.ComponentModel.ISupportInitialize)picPlayer).BeginInit();
             ((System.ComponentModel.ISupportInitialize)picEnemyBullet).BeginInit();
             ((System.ComponentModel.ISupportInitialize)picPlayerHP).BeginInit();
             ((System.ComponentModel.ISupportInitialize)picEnemyHP).BeginInit();
             ((System.ComponentModel.ISupportInitialize)picPlayerBullet).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)btnPicPause).BeginInit();
+            pnlIsExisting.SuspendLayout();
             SuspendLayout();
             // 
             // picEnemy
@@ -114,33 +122,116 @@
             // lblResult
             // 
             lblResult.BackColor = Color.Transparent;
-            lblResult.Font = new Font("Tempus Sans ITC", 38F, FontStyle.Bold | FontStyle.Italic);
+            lblResult.Font = new Font("Tempus Sans ITC", 30F, FontStyle.Bold | FontStyle.Italic);
             lblResult.ForeColor = Color.Red;
-            lblResult.Location = new Point(290, 222);
+            lblResult.Location = new Point(381, 288);
             lblResult.Name = "lblResult";
-            lblResult.Size = new Size(823, 167);
+            lblResult.Size = new Size(626, 99);
             lblResult.TabIndex = 7;
+            lblResult.Text = "<<GAME OVER>>";
             lblResult.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // lblScoreResult
             // 
-            lblScoreResult.AutoSize = true;
             lblScoreResult.BackColor = Color.Transparent;
-            lblScoreResult.Font = new Font("Tempus Sans ITC", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblScoreResult.Font = new Font("Tempus Sans ITC", 15F, FontStyle.Bold);
             lblScoreResult.ForeColor = Color.Red;
-            lblScoreResult.Location = new Point(407, 731);
+            lblScoreResult.Location = new Point(512, 400);
             lblScoreResult.Name = "lblScoreResult";
-            lblScoreResult.Size = new Size(0, 62);
+            lblScoreResult.Size = new Size(400, 136);
             lblScoreResult.TabIndex = 8;
+            lblScoreResult.Text = "Your current score is: this\r\n\r\n\r\n\r\n";
             lblScoreResult.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // btnBack
+            // 
+            btnBack.BackColor = Color.Black;
+            btnBack.Cursor = Cursors.Hand;
+            btnBack.Enabled = false;
+            btnBack.FlatStyle = FlatStyle.Flat;
+            btnBack.Font = new Font("Tempus Sans ITC", 10.125F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            btnBack.ForeColor = Color.Silver;
+            btnBack.Location = new Point(592, 667);
+            btnBack.Name = "btnBack";
+            btnBack.Size = new Size(234, 52);
+            btnBack.TabIndex = 9;
+            btnBack.TabStop = false;
+            btnBack.Text = "Back to Menu";
+            btnBack.UseVisualStyleBackColor = false;
+            btnBack.Click += btnBack_Click;
+            // 
+            // btnPicPause
+            // 
+            btnPicPause.BackColor = Color.Transparent;
+            btnPicPause.Image = (Image)resources.GetObject("btnPicPause.Image");
+            btnPicPause.Location = new Point(1342, 816);
+            btnPicPause.Name = "btnPicPause";
+            btnPicPause.Size = new Size(77, 74);
+            btnPicPause.SizeMode = PictureBoxSizeMode.StretchImage;
+            btnPicPause.TabIndex = 3;
+            btnPicPause.TabStop = false;
+            btnPicPause.Click += btnPicPause_Click;
+            // 
+            // pnlIsExisting
+            // 
+            pnlIsExisting.BackColor = Color.DarkRed;
+            pnlIsExisting.Controls.Add(btnResume);
+            pnlIsExisting.Controls.Add(btnExit);
+            pnlIsExisting.Controls.Add(lblAreYouSure);
+            pnlIsExisting.Location = new Point(521, 288);
+            pnlIsExisting.Name = "pnlIsExisting";
+            pnlIsExisting.Size = new Size(467, 269);
+            pnlIsExisting.TabIndex = 10;
+            // 
+            // btnResume
+            // 
+            btnResume.BackColor = Color.Chocolate;
+            btnResume.FlatStyle = FlatStyle.Popup;
+            btnResume.Font = new Font("Tempus Sans ITC", 9F, FontStyle.Italic, GraphicsUnit.Point, 0);
+            btnResume.ForeColor = Color.Black;
+            btnResume.Location = new Point(252, 150);
+            btnResume.Name = "btnResume";
+            btnResume.Size = new Size(181, 71);
+            btnResume.TabIndex = 2;
+            btnResume.Text = "No\r\nResume game\r\n";
+            btnResume.UseVisualStyleBackColor = false;
+            btnResume.Click += btnResume_Click;
+            // 
+            // btnExit
+            // 
+            btnExit.BackColor = Color.Chocolate;
+            btnExit.FlatStyle = FlatStyle.Popup;
+            btnExit.Font = new Font("Tempus Sans ITC", 9F, FontStyle.Italic, GraphicsUnit.Point, 0);
+            btnExit.ForeColor = Color.Black;
+            btnExit.Location = new Point(30, 150);
+            btnExit.Name = "btnExit";
+            btnExit.Size = new Size(184, 71);
+            btnExit.TabIndex = 1;
+            btnExit.Text = "Yes\r\nReturn to menu";
+            btnExit.UseVisualStyleBackColor = false;
+            btnExit.Click += btnExit_Click;
+            // 
+            // lblAreYouSure
+            // 
+            lblAreYouSure.AutoSize = true;
+            lblAreYouSure.Font = new Font("Tempus Sans ITC", 10.875F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblAreYouSure.ForeColor = Color.Black;
+            lblAreYouSure.Location = new Point(30, 33);
+            lblAreYouSure.Name = "lblAreYouSure";
+            lblAreYouSure.Size = new Size(403, 114);
+            lblAreYouSure.TabIndex = 0;
+            lblAreYouSure.Text = "     Do you want to exit?\r\n(Your score will not be saved)\r\n\r\n";
             // 
             // FormGame
             // 
-            AutoScaleDimensions = new SizeF(13F, 32F);
-            AutoScaleMode = AutoScaleMode.Font;
+            AutoScaleMode = AutoScaleMode.None;
+            BackColor = SystemColors.Control;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(1455, 944);
+            Controls.Add(pnlIsExisting);
+            Controls.Add(btnPicPause);
+            Controls.Add(btnBack);
             Controls.Add(lblScoreResult);
             Controls.Add(lblResult);
             Controls.Add(picEnemyBullet);
@@ -149,6 +240,7 @@
             Controls.Add(picPlayer);
             Controls.Add(picPlayerHP);
             Controls.Add(picEnemy);
+            ForeColor = Color.AntiqueWhite;
             Name = "FormGame";
             Load += FormGame_Load;
             ((System.ComponentModel.ISupportInitialize)picEnemy).EndInit();
@@ -157,8 +249,10 @@
             ((System.ComponentModel.ISupportInitialize)picPlayerHP).EndInit();
             ((System.ComponentModel.ISupportInitialize)picEnemyHP).EndInit();
             ((System.ComponentModel.ISupportInitialize)picPlayerBullet).EndInit();
+            ((System.ComponentModel.ISupportInitialize)btnPicPause).EndInit();
+            pnlIsExisting.ResumeLayout(false);
+            pnlIsExisting.PerformLayout();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
@@ -171,5 +265,11 @@
         private System.Windows.Forms.Timer timer1;
         private Label lblResult;
         private Label lblScoreResult;
+        private Button btnBack;
+        private PictureBox btnPicPause;
+        private Panel pnlIsExisting;
+        private Label lblAreYouSure;
+        private Button btnResume;
+        private Button btnExit;
     }
 }

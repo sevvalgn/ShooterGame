@@ -1,4 +1,7 @@
 <Solution>
   <Project Path="ShooterGame/ShooterGame.csproj" />
   <Project Path="ShooterGameAPI/ShooterGameAPI.csproj" Id="8dceadbe-85ff-4022-960f-b60a2622f680" />
+  <Project Path="ShooterGameInstaller/ShooterGameInstaller.vdproj" Type="Installer">
+    <Build />
+  </Project>
 </Solution>

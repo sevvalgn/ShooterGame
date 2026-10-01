@@ -26,6 +26,8 @@ namespace ShooterGame
             InitializeComponent();
             this.menuForm = menu;
             this.playerName = playerName;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
         }
         private void picFairy_Click(object sender, EventArgs e)
         {

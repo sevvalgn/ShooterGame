@@ -36,6 +36,10 @@ namespace ShooterGameAPI.Controllers
             {
                 return BadRequest();
             }
+            if(db.feedbacks.Any(u => u.Name == feedback.Name && u.Feedback == feedback.Feedback))
+            {
+                return Conflict();
+            }
             db.feedbacks.Add(feedback);
             await db.SaveChangesAsync();            
             return Ok();

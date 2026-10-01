@@ -140,7 +140,7 @@
             // FormRegister
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
-            AutoScaleMode = AutoScaleMode.Font;
+            AutoScaleMode = AutoScaleMode.None;
             BackgroundImage = Properties.Resources.BackgroundRegister;
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(1463, 930);

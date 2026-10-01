@@ -27,6 +27,8 @@ namespace ShooterGame
         private int playerDamagedTime = 0;
         private bool isEnemyDamaged;
         private int enemyDamagedTime = 0;
+        private DateTime gameStart;
+
 
 
         public FormGame(FormMenu menuForm, Player player)
@@ -35,6 +37,8 @@ namespace ShooterGame
 
             this.menuForm = menuForm;
             this.player = player;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
             playerImages = player.GetPlayerImage();
             enemyImages = Enemy.GetPlayerImage();
             playerHpImages = player.GetHPBarImage();
@@ -49,18 +53,19 @@ namespace ShooterGame
         private void FormGame_Load(object sender, EventArgs e)
         {
             this.BackgroundImage = Image.FromFile(@"Resources\BackgroundGame1.png");
+            pnlIsExisting.Visible = false;
             lblResult.Visible = false;
             lblScoreResult.Visible = false;
             picEnemyBullet.Visible = false;
             picPlayerBullet.Visible = false;
-
+            btnBack.Visible = false;
             picPlayer.Image = playerImages.ElementAt(0);
             picEnemy.Image = enemyImages.ElementAt(0);
             picPlayerHP.Image = playerHpImages.ElementAt(0);
             picEnemyHP.Image = enemyHpImages.ElementAt(0);
             picPlayerBullet.Image = player.GetBulletImage();
             picEnemyBullet.Image = Enemy.GetBulletImage();
-            timer1.Interval = 100;
+            gameStart = DateTime.Now;
             timer1.Start();
         }
         private void FormGame_KeyDown(object sender, KeyEventArgs a)
@@ -75,7 +80,7 @@ namespace ShooterGame
                 isJumping = true;
             }
         }
-        private async void timer1_Tick(object sender, EventArgs e)
+        private void timer1_Tick(object sender, EventArgs e)
         {
             int enemyAttack = Enemy.Attack();
             int playerAttack = player.Attack();
@@ -128,7 +133,7 @@ namespace ShooterGame
                     picPlayerHP.Image = playerHpImages.ElementAt(playerHpFrame);
                 }
                 player.CurrentHealth = player.CurrentHealth - enemyAttack;
-                player.PlayerScore -= player.Attack();
+                player.PlayerScore -= (int)((double)enemyAttack / player.Health() * 1200);
             }
             else
             {
@@ -186,30 +191,34 @@ namespace ShooterGame
             }
             if (Enemy.CurrentHealth <= 0)
             {
+                int timespent = (int)(DateTime.Now - gameStart).TotalSeconds;
+                player.PlayerScore = player.PlayerScore + timespent * 100;
                 timer1.Stop();
                 lblResult.Text = "<<VICTORY>>";
                 lblScoreResult.Text = "Your current score is: " + player.PlayerScore;
+                this.BackgroundImage = Image.FromFile(@"Resources\BackgroundGame2.png");
+                btnPicPause.Visible = false;
                 lblResult.Visible = true;
                 lblScoreResult.Visible = true;
                 this.Refresh();
-                Thread.Sleep(2500);
-                await SaveScore(player);
-                this.Hide();
-                menuForm.Show();
-
+                _ = SaveScore(player);
+                btnBack.Visible = true;
+                btnBack.Enabled = true;
             }
             else if (player.CurrentHealth <= 0)
             {
+                int timespent = (int)(DateTime.Now - gameStart).TotalSeconds;
+                player.PlayerScore = player.PlayerScore + timespent * 100;
                 timer1.Stop();
                 lblResult.Text = "<<GAME OVER>>";
                 lblScoreResult.Text = "Your current score is: " + player.PlayerScore;
+                btnPicPause.Visible = false;
                 lblResult.Visible = true;
                 lblScoreResult.Visible = true;
                 this.Refresh();
-                Thread.Sleep(2500);
-                await SaveScore(player);
-                this.Hide();
-                menuForm.Show();
+                _ = SaveScore(player);
+                btnBack.Visible = true;
+                btnBack.Enabled = true;
             }
         }
         static async Task SaveScore(Player player)
@@ -224,11 +233,45 @@ namespace ShooterGame
             };
             string json = JsonSerializer.Serialize(leaderboardPlayer);
             StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await client.PostAsync("https://localhost:7287/api/leaderboard", content);
-            if(response.StatusCode == System.Net.HttpStatusCode.Conflict)
+            HttpResponseMessage response = await client.PostAsync($"{ApiUrl.url}/api/leaderboard", content);
+            if (response.StatusCode == System.Net.HttpStatusCode.Conflict)
             {
-                await client.PutAsync("https://localhost:7287/api/leaderboard", content);
+                await client.PutAsync($"{ApiUrl.url}/api/leaderboard", content);
             }
+        }
+
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            btnBack.Enabled = false;
+            try
+            {
+                this.Hide();
+                menuForm.Show();
+            }
+            finally
+            {
+                btnBack.Enabled = true;
+            }
+        }
+
+        private void btnPicPause_Click(object sender, EventArgs e)
+        {
+            timer1.Stop();
+            pnlIsExisting.Visible = true;
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            menuForm.Show();
+        }
+
+        private void btnResume_Click(object sender, EventArgs e)
+        {
+            timer1.Start();
+            pnlIsExisting.Visible = false;
+            this.ActiveControl = null;
+            this.Focus();
         }
     }
 }

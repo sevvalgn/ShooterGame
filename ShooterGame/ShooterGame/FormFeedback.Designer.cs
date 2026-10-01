@@ -32,7 +32,7 @@
             pictureBox1 = new PictureBox();
             txtboxfeedback = new TextBox();
             btnSend = new Button();
-            button1 = new Button();
+            btnBack = new Button();
             lblCharacterCount = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
@@ -75,17 +75,17 @@
             btnSend.UseVisualStyleBackColor = false;
             btnSend.Click += btnSend_Click;
             // 
-            // button1
+            // btnBack
             // 
-            button1.BackColor = Color.Olive;
-            button1.Font = new Font("Tempus Sans ITC", 10.875F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button1.Location = new Point(28, 44);
-            button1.Name = "button1";
-            button1.Size = new Size(193, 51);
-            button1.TabIndex = 3;
-            button1.Text = "<<Back";
-            button1.UseVisualStyleBackColor = false;
-            button1.Click += button1_Click;
+            btnBack.BackColor = Color.Olive;
+            btnBack.Font = new Font("Tempus Sans ITC", 10.875F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnBack.Location = new Point(28, 44);
+            btnBack.Name = "btnBack";
+            btnBack.Size = new Size(193, 51);
+            btnBack.TabIndex = 3;
+            btnBack.Text = "<<Back";
+            btnBack.UseVisualStyleBackColor = false;
+            btnBack.Click += btnBack_Click;
             // 
             // lblCharacterCount
             // 
@@ -102,12 +102,12 @@
             // FormFeedback
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
-            AutoScaleMode = AutoScaleMode.Font;
+            AutoScaleMode = AutoScaleMode.None;
             BackColor = Color.White;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             ClientSize = new Size(1469, 950);
             Controls.Add(lblCharacterCount);
-            Controls.Add(button1);
+            Controls.Add(btnBack);
             Controls.Add(btnSend);
             Controls.Add(txtboxfeedback);
             Controls.Add(pictureBox1);
@@ -126,7 +126,7 @@
         private PictureBox pictureBox1;
         private TextBox txtboxfeedback;
         private Button btnSend;
-        private Button button1;
+        private Button btnBack;
         private Label lblCharacterCount;
     }
 }

@@ -18,36 +18,59 @@ namespace ShooterGame
             InitializeComponent();
             this.menuForm = menuForm;
             this.playerName = playerName;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
         }
 
         private async void btnSend_Click(object sender, EventArgs e)
         {
-            string feedback = txtboxfeedback.Text;
-            Feedbacks feedbacks = new Feedbacks() { Feedback = feedback, Name = playerName};
-            if (!string.IsNullOrWhiteSpace(feedback))
+            btnSend.Enabled = false;
+            try
             {
-                HttpClient client = new HttpClient();
-    
-                string json = JsonSerializer.Serialize(feedbacks);
-                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
-                HttpResponseMessage response = await client.PostAsync("https://localhost:7287/api/feedbacks", content);
-                if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                string feedback = txtboxfeedback.Text;
+                Feedbacks feedbacks = new Feedbacks() { Feedback = feedback, Name = playerName };
+                if (!string.IsNullOrWhiteSpace(feedback))
                 {
-                    MessageBox.Show("Feedback submitted successfully.");
-                    this.Hide();
-                    menuForm.Show();
-                }
-                else if(response.StatusCode == System.Net.HttpStatusCode.BadRequest)
-                {
-                    MessageBox.Show("Unsuccesfull.");
+                    HttpClient client = new HttpClient();
+
+                    string json = JsonSerializer.Serialize(feedbacks);
+                    StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+                    HttpResponseMessage response = await client.PostAsync($"{ApiUrl.url}/api/feedbacks", content);
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        MessageBox.Show("Feedback submitted successfully.");
+                        this.Hide();
+                        menuForm.Show();
+                    }
+                    else if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)
+                    {
+                        MessageBox.Show("Unsuccesfull.");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Already submitted.");
+                    }
                 }
             }
+            finally
+            {
+                btnSend.Enabled = true;
+            }
+            
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnBack_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            menuForm.Show();
+            btnBack.Enabled = false;
+            try
+            {
+                this.Hide();
+                menuForm.Show();
+            }
+            finally
+            {
+                btnBack.Enabled = true;
+            }
         }
 
         private void FormFeedback_Load(object sender, EventArgs e)

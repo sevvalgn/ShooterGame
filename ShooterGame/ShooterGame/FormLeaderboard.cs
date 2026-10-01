@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
 using System.Net.Http;
+using System.Text;
 using System.Text.Json;
+using System.Windows.Forms;
 
 namespace ShooterGame
 {
@@ -21,6 +21,8 @@ namespace ShooterGame
             InitializeComponent();
             this.menuForm = menu;
             Load += FormLeaderboard_Load;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
 
         }
         private async void FormLeaderboard_Load(object sender, EventArgs e)
@@ -35,33 +37,63 @@ namespace ShooterGame
             {
                 PropertyNameCaseInsensitive = true
             };
-            string json = await client.GetStringAsync("https://localhost:7287/api/leaderboard/10");
+            string json = await client.GetStringAsync($"{ApiUrl.url}/api/leaderboard/10");
             List<LeaderboardPlayer> leaderboard = JsonSerializer.Deserialize<List<LeaderboardPlayer>>(json, options);
             if(leaderboard == null)
             {
                 return;
             }
-            foreach (LeaderboardPlayer player in leaderboard)
+            lblLoading.SendToBack();
+            for(int i = 0; i < leaderboard.Count; i++)
             {
-                if (player.Name == playerName)
+                if (leaderboard[i].Name == playerName)
                 {
                     lblLeaderboard.Text += ">>";
                 }
-                lblLeaderboard.Text += $"{player.Name} - {player.CharacterType} - {player.Score} \n";
+                if (i == 0)
+                {
+                    lblLeaderboard.Text += "🥇 ";
+                }
+                if (i == 1)
+                    lblLeaderboard.Text += "🥈 ";
+
+                if (i == 2)
+                    lblLeaderboard.Text += "🥉 ";
+                lblLeaderboard.Text += $"{i + 1}. {leaderboard[i].Name} - {leaderboard[i].CharacterType} - {leaderboard[i].Score} \n";
+                await Task.Delay(150);
             }
         }
 
         private void btnReturnMenu_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            menuForm.Show();
+            btnReturnMenu.Enabled = false;
+            try
+            {
+                this.Hide();
+                menuForm.Show();
+
+            }
+            finally
+            {
+                btnReturnMenu.Enabled = true;
+            }
         }
 
         private void picFeedback_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            FormFeedback feedback = new FormFeedback(menuForm, playerName);
-            feedback.Show();
+            picFeedback.Enabled = false;
+            try
+            {
+                this.Hide();
+                FormFeedback feedback = new FormFeedback(menuForm, playerName);
+                feedback.Show();
+            }
+            finally
+            {
+                picFeedback.Enabled = true;
+            }
+
+
         }
     }
 }

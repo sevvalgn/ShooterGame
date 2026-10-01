@@ -9,6 +9,8 @@ namespace ShooterGame
         public FormLogin()
         {
             InitializeComponent();
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
         }
 
         private void FormLogin_Load(object sender, EventArgs e)
@@ -17,42 +19,60 @@ namespace ShooterGame
         }
         private async void btnLogin_Click(object sender, EventArgs e)
         {
-            string playerName = txtboxName.Text;
-            string password = txtboxPwd.Text;
-            if (!string.IsNullOrWhiteSpace(playerName) && !string.IsNullOrWhiteSpace(password))
+            btnLogin.Enabled = false;
+            try
             {
-                HttpClient client = new HttpClient();
-                User user = new User() { Name = playerName, Password = password };
-     
-                string json = JsonSerializer.Serialize(user);
-                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
-                HttpResponseMessage response = await client.PostAsync("https://localhost:7287/api/loginregister/login", content);
-                if(response.StatusCode == System.Net.HttpStatusCode.NotFound)
+                string playerName = txtboxName.Text.Trim();
+                string password = txtboxPwd.Text;
+                if (!string.IsNullOrWhiteSpace(playerName) && !string.IsNullOrWhiteSpace(password))
                 {
-                    MessageBox.Show("No account for " + playerName + " please register.");
-                    return;
+                    HttpClient client = new HttpClient();
+                    User user = new User() { Name = playerName, Password = password };
+
+                    string json = JsonSerializer.Serialize(user);
+                    StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+                    HttpResponseMessage response = await client.PostAsync($"{ApiUrl.url}/api/loginregister/login", content);
+                    if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
+                    {
+                        MessageBox.Show("No account for " + playerName + " please register.");
+                        return;
+                    }
+                    else if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+                    {
+                        MessageBox.Show("Unvalid password, please try again.");
+                        return;
+                    }
+                    //hide the login page and show the menu page
+                    this.Hide();
+                    FormMenu menu = new FormMenu(playerName);
+                    menu.Show();
+                    btnLogin.Enabled = true;
                 }
-                else if(response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+                else
                 {
-                    MessageBox.Show("Unvalid password, please try again.");
-                    return;
+                    MessageBox.Show("Please fill in required fields.");
                 }
-                //hide the login page and show the menu page
-                this.Hide();
-                FormMenu menu = new FormMenu(playerName);
-                menu.Show();                     
             }
-            else
+            finally
             {
-                MessageBox.Show("Please fill in required fields.");
+                btnLogin.Enabled = true;
             }
         }
 
         private void btnRegister_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            FormRegister register = new FormRegister(this);
-            register.Show();
+            btnRegister.Enabled = false;
+            try
+            {
+                this.Hide();
+                FormRegister register = new FormRegister(this);
+                register.Show();
+
+            }
+            finally
+            {
+                btnRegister.Enabled = true;
+            }
         }
     }
 }

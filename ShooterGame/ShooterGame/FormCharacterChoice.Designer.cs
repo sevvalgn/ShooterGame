@@ -210,8 +210,7 @@
             // 
             // FormCharacterChoice
             // 
-            AutoScaleDimensions = new SizeF(13F, 32F);
-            AutoScaleMode = AutoScaleMode.Font;
+            AutoScaleMode = AutoScaleMode.None;
             BackColor = Color.Olive;
             ClientSize = new Size(1450, 892);
             Controls.Add(lblOldman);

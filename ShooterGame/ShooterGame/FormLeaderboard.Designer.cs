@@ -33,6 +33,7 @@
             btnReturnMenu = new Button();
             picFeedback = new PictureBox();
             pictureBox1 = new PictureBox();
+            lblLoading = new Label();
             ((System.ComponentModel.ISupportInitialize)picFeedback).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
@@ -42,9 +43,9 @@
             lblLeaderboard.BackColor = Color.Transparent;
             lblLeaderboard.Font = new Font("Tempus Sans ITC", 10.125F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblLeaderboard.ForeColor = Color.Black;
-            lblLeaderboard.Location = new Point(419, 83);
+            lblLeaderboard.Location = new Point(428, 88);
             lblLeaderboard.Name = "lblLeaderboard";
-            lblLeaderboard.Size = new Size(640, 372);
+            lblLeaderboard.Size = new Size(627, 364);
             lblLeaderboard.TabIndex = 0;
             // 
             // btnReturnMenu
@@ -86,16 +87,29 @@
             pictureBox1.TabIndex = 3;
             pictureBox1.TabStop = false;
             // 
+            // lblLoading
+            // 
+            lblLoading.AutoSize = true;
+            lblLoading.BackColor = Color.Transparent;
+            lblLoading.Font = new Font("Tempus Sans ITC", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            lblLoading.ForeColor = Color.Olive;
+            lblLoading.Location = new Point(573, 238);
+            lblLoading.Name = "lblLoading";
+            lblLoading.Size = new Size(349, 42);
+            lblLoading.TabIndex = 4;
+            lblLoading.Text = "Leaderboard is loadig...";
+            // 
             // FormLeaderboard
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
-            AutoScaleMode = AutoScaleMode.Font;
+            AutoScaleMode = AutoScaleMode.None;
             BackgroundImage = Properties.Resources.BackgroundLeaderboard;
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(1462, 880);
             Controls.Add(picFeedback);
             Controls.Add(pictureBox1);
             Controls.Add(btnReturnMenu);
+            Controls.Add(lblLoading);
             Controls.Add(lblLeaderboard);
             DoubleBuffered = true;
             Name = "FormLeaderboard";
@@ -103,6 +117,7 @@
             ((System.ComponentModel.ISupportInitialize)picFeedback).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -111,5 +126,6 @@
         private Button btnReturnMenu;
         private PictureBox picFeedback;
         private PictureBox pictureBox1;
+        private Label lblLoading;
     }
 }

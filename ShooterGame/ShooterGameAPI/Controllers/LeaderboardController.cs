@@ -28,11 +28,11 @@ namespace ShooterGameAPI.Controllers
 
         public async Task<ActionResult<Leaderboard>> AddPlayer(Leaderboard player)
         {
-            var existingPlayer = db.leaderboard.FirstOrDefault(p => p.Name == player.Name && p.CharacterType == player.CharacterType);
             if (player == null)
             {
                 return BadRequest();
             }
+            var existingPlayer = db.leaderboard.FirstOrDefault(p => p.Name == player.Name && p.CharacterType == player.CharacterType);
             if (existingPlayer != null)
             {
                 return Conflict();
@@ -41,7 +41,7 @@ namespace ShooterGameAPI.Controllers
             {
                 return BadRequest();
             }
-            if (player.Score < 0 || player.Score > 14000)
+            if (player.Score < 0)
             {
                 return BadRequest();
             }
@@ -59,7 +59,7 @@ namespace ShooterGameAPI.Controllers
             {
                 return NotFound();
             }
-            if (player.Score < 0 || player.Score > 14000)
+            if (player.Score < 0)
             {
                 return BadRequest();
             }
