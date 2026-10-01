@@ -1,145 +1,346 @@
 # ShooterGame
+## Project Overview
 
-ShooterGame is an ongoing game development project built in C#.
+ShooterGame is a single-player shooter game developed in C#.
+This project was created as a learning project focused on applying software development concepts through the continuous development of a single application rather than multiple isolated exercises.
 
-The goal of the project from the beginning has been to develop a complete, installable game that can eventually connect to online services such as a shared leaderboard.
+Before development began, the project was planned around four primary goals:
 
-Instead of building separate small projects for each topic I wanted to learn, I decided to keep developing the same game and use each stage to introduce new concepts and solve new problems.
+* Building the game logic
+* Integrating a database
+* Creating a graphical interface
+* Making the application available online
+
+The project started as a console-based shooter and later evolved into a Windows Forms application connected to a cloud-hosted backend through an ASP.NET Core Web API.
+
+Today, the project includes:
+
+* User registration and login
+* Secure password storage using BCrypt
+* Character selection
+* Online leaderboard
+* Feedback submission
+* Cloud-hosted API
+* Cloud-hosted MySQL database
+* Installable Windows application
+
+Users can install and play the game without accessing the source code.
+## Download
+ 
+The latest installable version can be downloaded from the Releases page.
+> Download: sha256:8edfa07e8de8dbf0b160500be953abe3eda0d578af5ed9670fb0f2e18d567382
+
+## System Architecture
+
+    ShooterGame (WinForms Client)
+               │
+             HTTP
+               │
+               ▼
+        ShooterGameAPI
+       (ASP.NET Core Web API)
+               │
+       Entity Framework Core
+               │
+               ▼
+    Azure Database for MySQL
+
+The Windows Forms application communicates with the backend through HTTP requests. The API handles application and database communication while Entity Framework Core provides access to the MySQL database.
 
 ## Features
-
-- Multiple playable characters with different health and attack values
-- Character selection
-- Shooting system
-- Enemy projectile system
-- Jumping
-- Collision detection
-- Sprite-based animations
-- Damage and health systems
-- Login and registration
-- MySQL database integration
-- Persistent leaderboard
-- Feedback system
-- Windows Forms graphical interface
-- Victory and Game Over states
-- ASP.NET Core Web API
-
-## Screenshots
-
-### Console Version
-
-<img width="1394" height="1040" alt="Ekran görüntüsü 2026-07-11 002638" src="https://github.com/user-attachments/assets/8ba07a7f-51f2-4974-9737-bbe38ceb6f51" />
-
-### Login
-
-<img width="1430" height="958" alt="Ekran görüntüsü 2026-09-04 140821" src="https://github.com/user-attachments/assets/961498c6-11c6-432c-9cd0-c191d5ba673f" />
-
-### Register
-
-<img width="1452" height="976" alt="Ekran görüntüsü 2026-09-04 141939" src="https://github.com/user-attachments/assets/f822a10a-5cce-46c6-9067-39dbe16cf704" />
-
-### Main Menu
-
-<img width="1438" height="898" alt="Ekran görüntüsü 2026-09-04 140904" src="https://github.com/user-attachments/assets/a00f1489-2aa1-48fd-a8e3-ea87296ffb4f" />
-### Character Selection
-
-<img width="1446" height="942" alt="Ekran görüntüsü 2026-09-04 140918" src="https://github.com/user-attachments/assets/70cdf9dd-8574-4afe-b53f-3dbdfd05225c" />
 ### Gameplay
+* Single-player shooter gameplay
+* Multiple playable characters
+* Character selection
+* Unique health and attack values
+* Shooting mechanics
+* Enemy projectile system
+* Jumping mechanics
+* Collision detection
+* Health system
+* Score calculation
+* Victory state
+* Game Over state
+### User System
+* User registration
+* User login
+* BCrypt password hashing
+* Secure password verification
+### Online Features
+* Online leaderboard
+* Best-score tracking
+* Feedback submission
+* Cloud-hosted backend
+### Desktop Application
+* Windows Forms interface
+* Installable setup package
+* Desktop shortcut creation
+* Custom application icon
+* Fixed window size
+* Controlled scaling configuration
+* Leaderboard System
 
-<img width="1436" height="992" alt="Ekran görüntüsü 2026-09-04 141008" src="https://github.com/user-attachments/assets/d6f0c415-b493-4e81-a31a-457e2c1ee0f1" />
-<img width="1448" height="1000" alt="Ekran görüntüsü 2026-09-04 143316" src="https://github.com/user-attachments/assets/8c4e6857-aaa7-489d-82b8-5afcc13c5775" />
+*The leaderboard displays the Top 10 scores.*
 
-### Leaderboard
+Each leaderboard record contains:
 
-<img width="1456" height="938" alt="Ekran görüntüsü 2026-09-04 142809" src="https://github.com/user-attachments/assets/e7c5fc6c-b367-419a-95fa-2ead040da4f5" />
-### Feedback
+- Username
+- Selected Character
+- Score
 
-<img width="1470" height="1006" alt="Ekran görüntüsü 2026-09-20 141850" src="https://github.com/user-attachments/assets/0350e505-274a-4af4-b3bb-6125d82a1741" />
+Scores are calculated using a combination of:
 
-### API
+- Damage dealt
+- Remaining health
+- Character attack value
+- Survival time
 
-The game client now communicates with a separate ASP.NET Core API.
-<img width="2330" height="456" alt="Ekran görüntüsü 2026-09-20 142944" src="https://github.com/user-attachments/assets/6be7b5cf-7a09-4ed1-a81b-3b5799154630" />
-<img width="1780" height="500" alt="Ekran görüntüsü 2026-09-20 143030" src="https://github.com/user-attachments/assets/ae62db23-93a4-493a-8c00-bcfcb91ceb99" />
+**Only a player's highest score is stored.**
 
 ## Characters
 
 | Character | Health | Attack |
-| --- | ---: | ---: |
+|---|---:|---:|
 | Fairy | 800 | 250 |
 | Soldier | 500 | 500 |
-| OldMan | 300 | 1000 |
+| Old Man | 300 | 1000 |
 | Enemy | 14000 | 100 |
 
-The characters have different gameplay statistics and their own visual assets, animation frames, projectile graphics, and health-bar states.
+Each character includes:
 
-## Roadmap
+* Unique statistics
+* Unique visual assets
+* Unique animation frames
+* Unique projectile graphics
+* Unique health-bar states
+* Technologies Used
+* Category
 
-### Completed
+## Technologies
+| Category | Technology |
+|----------|------------|
+| Language | C# |
+| Desktop Application | Windows Forms |
+| Backend | ASP.NET Core Web API |
+| Data Access | Entity Framework Core |
+| Database | MySQL |
+| Cloud Database | Azure Database for MySQL |
+| Cloud Service | Azure App Service |
+| Security | BCrypt Password Hashing |
+| Distribution | Visual Studio Setup Project |
 
-✅ Console shooter game
+## Project Evolution
+### Phase 1 — Core Game Development
 
-✅ Login system
+The project began as a console-based shooter game. Before development began, the core *gameplay systems and development stages were planned*.
 
-✅ Database integration
+This phase focused on building the foundation of the application, including:
 
-✅ Persistent leaderboard
+- Object-Oriented Programming principles
+- Character system
+- Health and damage mechanics
+- Shooting system
+- Enemy attacks
+- Jumping mechanics
+- Collision detection
+- Score calculation
+- Game state management
 
-✅ Graphical user interface with Windows Forms
+The initial game logic was developed within a few days and became the foundation for every later stage of the project. **As new technologies were added, the existing systems were adapted and expanded rather than rewritten from scratch**.
 
-✅ Improved project structure and code organization
+## Phase 2 — Database Integration
 
-✅ ASP.NET Core API architecture
+After the gameplay systems were established, the next step was adding persistent data.
 
-### Next Steps
+To achieve this, a MySQL database was designed and integrated into the project.
 
-🔜 Deploy the backend and database and enable the online leaderboard.
+This phase introduced:
 
-## Project Progress
+- User registration
+- User login
+- Persistent leaderboard records
 
-### ✅ Step 1 — Core Game
+During this stage, the focus was on:
 
-The project started as a console-based shooter.
+* SQL
+* Database design
+* Database connectivity
+* Data persistence
 
-The initial stage focused on building the core gameplay systems, including character selection, movement, shooting, jumping, projectiles, collision detection, scoring, and game-state handling.
+## Phase 3 — Windows Forms Migration
 
-This stage also strengthened my existing C# and object-oriented programming knowledge.
+The next stage involved moving the project from a console application to a graphical interface.
 
-### ✅ Step 2 — Database Integration
+The primary challenge was adapting existing gameplay systems to an event-driven environment while preserving the original game mechanics.
 
-The next stage introduced MySQL and persistent data.
+During this phase, the project received:
 
-This added user registration, login, persistent scores, leaderboard data, and feedback functionality.
+- Login screen
+- Registration screen
+- Main menu
+- Character selection screen
+- Gameplay interface
+- Leaderboard interface
 
-I learned SQL, database design, and how database operations can be connected to application logic while continuing to develop the same game.
+This phase introduced:
 
-### ✅ Step 3 — Graphical UI
+* Windows Forms
+* Event-driven programming
+* Resource management
+* Animation handling
+* UI architecture
 
-The project was then moved from the console to a Windows Forms graphical interface.
+## Phase 4 — API Architecture
 
-This required adapting the existing game systems to an event-driven graphical environment.
+As the project grew, direct database communication was replaced with a dedicated backend layer.
 
-The game received graphical menus, character selection, animations, health bars, gameplay screens, leaderboard and feedback forms.
+To achieve this, an ASP.NET Core Web API was introduced.
 
-The goal was not simply to change the appearance of the game, but to make the existing game systems work inside a graphical application.
+The API:
 
-### ✅ Step 4 — API Architecture
+- Performs CRUD operations
+- Handles communication between the client and database
+- Removes direct database access from the client application
 
-The next architectural step was separating the game client from the database layer.
+This phase introduced:
 
-The project now contains a Windows Forms client and a separate ASP.NET Core Web API.
+* REST APIs
+* HTTP communication
+* Entity Framework Core
+* Backend architecture
+* Authentication workflows
+* Feedback interface
 
-```text
-ShooterGame
-Windows Forms Client
-        |
-      HTTP
-        |
-        v
-ShooterGameAPI
-ASP.NET Core
-        |
-Entity Framework Core
-        |
-        v
-      MySQL
+**Passwords are hashed using BCrypt and verified during login.**
+
+## Phase 5 — Cloud Deployment
+
+The next goal was making the application *accessible outside the local environment*.
+
+To achieve this, both the API and database were deployed to Microsoft Azure.
+
+- Azure App Service
+- Hosts the ASP.NET Core Web API.
+- Azure Database for MySQL
+- Hosts the production database.
+
+This allows users to:
+
+* Register accounts
+* Login
+* Submit feedback
+* Appear on the online leaderboard
+
+without requiring a local server or database installation.
+
+## Phase 6 — Software Distribution
+
+The final stage involved packaging the application as an installable Windows product.
+
+The game now includes:
+
+- Windows Installer
+- Desktop shortcut creation
+- Custom application icon
+- Fixed window size
+- Controlled scaling configuration
+
+Users can download, install, and play the game without accessing the source code or building the project manually.
+
+## Screenshots
+### Console Version
+<img width="1408" height="1058" alt="Ekran görüntüsü 2026-07-11 002415" src="https://github.com/user-attachments/assets/d665c0b4-4068-4bb1-bc5d-79724d635912" />
+
+### Login
+<img width="1430" height="958" alt="Ekran görüntüsü 2026-09-04 140821" src="https://github.com/user-attachments/assets/d46891b0-03ff-4f65-8f0e-b6e9c5c3b106" />
+
+## Registration
+<img width="1452" height="976" alt="Ekran görüntüsü 2026-09-04 141939" src="https://github.com/user-attachments/assets/4dc8cff9-5176-448e-a5b9-5732e565808b" />
+
+## Main Menu
+<img width="1438" height="898" alt="Ekran görüntüsü 2026-09-04 140904" src="https://github.com/user-attachments/assets/eda3959f-5932-4b8f-b453-b2fb1bf48eeb" />
+
+## Character Selection
+
+<img width="1446" height="942" alt="Ekran görüntüsü 2026-09-04 140918" src="https://github.com/user-attachments/assets/01aea7ea-1a74-4faa-8084-7653b26cb09f" />
+
+## Gameplay
+<img width="1448" height="998" alt="Ekran görüntüsü 2026-10-01 165152" src="https://github.com/user-attachments/assets/b05b3c31-cb87-4af2-80a8-7fb713212f91" />
+<img width="1456" height="996" alt="Ekran görüntüsü 2026-10-01 165211" src="https://github.com/user-attachments/assets/f5dadfed-15e6-41c3-8744-630899bfa155" />
+<img width="1444" height="1000" alt="Ekran görüntüsü 2026-10-01 165130" src="https://github.com/user-attachments/assets/f79351b6-1a7f-4e8f-8723-f9587a7009cc" />
+
+## Leaderboard
+<img width="1460" height="938" alt="image" src="https://github.com/user-attachments/assets/078d7d6a-3358-4edf-a25c-001fbea1d763" />
+
+## Feedback
+<img width="1470" height="1006" alt="Ekran görüntüsü 2026-09-20 141850" src="https://github.com/user-attachments/assets/7e6d673e-ba71-4afd-bf0d-b82ba4fc7fba" />
+
+## API
+<img width="1780" height="500" alt="Ekran görüntüsü 2026-09-20 143030" src="https://github.com/user-attachments/assets/a56e5703-ffec-4813-8eeb-cc027f22df1b" />
+<img width="2330" height="456" alt="Ekran görüntüsü 2026-09-20 142944" src="https://github.com/user-attachments/assets/103b4b26-b904-45b1-a8d2-e5762b2f0771" />
+
+## Installer
+<img width="990" height="808" alt="image" src="https://github.com/user-attachments/assets/bd34a433-33aa-4fe0-a1ef-01a45b201162" />
+<img width="190" height="210" alt="image" src="https://github.com/user-attachments/assets/0154b9c8-83b0-43a7-9442-b1769eed817d" />
+
+
+## Installation
+### Requirements
+* Windows
+* Internet connection for online features
+### Installation Steps
+* Download the latest release.
+* Run the installer.
+* Launch the game using the desktop shortcut.
+* Register a new account.
+* Login.
+* Select a character.
+* Play and compete for a place on the leaderboard.
+
+## Visual Assets
+
+**Visual assets were created using AI-assisted image generation tools and then adapted, organized, and integrated into the game by the developer.**
+
+This includes:
+
+* Character sprites
+* Animation frames
+* UI assets
+* Environmental visuals
+
+## What I Learned
+
+Besides improving my *C# skills* and *learning SQL*, *Windows Forms*, *ASP.NET Core Web API*, *MySQL*, *Azure*, and *deployment concepts*, the project also helped me **develop skills that are not tied to a specific technology**.
+
+These include:
+
+* Resource management
+* Database connectivity
+* Application architecture
+* API design
+* Debugging
+* Deployment
+* Application distribution
+* Problem investigation
+* Structured problem solving
+
+**The project required understanding not only how individual technologies work, but also how they interact within a complete software system**.
+
+## Why This Project Matters To Me
+
+The objective was never to learn a technology in isolation.
+
+Instead, the goal was to continuously develop a single project while introducing new features, solving new problems, and expanding the architecture whenever new requirements appeared.
+
+What started as a console-based shooter eventually became:
+
+* A graphical desktop application
+* A database-driven system
+* A cloud-connected application
+* An installable software product
+
+The project achieved the goals originally defined during planning while also introducing additional concepts and challenges throughout development.
+
+## Project Status
+
+The current version represents the latest stage of the project, including the game client, backend API, database integration, cloud deployment, and Windows installer.
