@@ -28,7 +28,7 @@ Users can install and play the game without accessing the source code.
 ## Download
  
 The latest installable version can be downloaded from the Releases page.
-> Download: sha256:8edfa07e8de8dbf0b160500be953abe3eda0d578af5ed9670fb0f2e18d567382
+> Download: https://github.com/sevvalgn/ShooterGame/releases/tag/v5.0
 
 ## System Architecture
 
